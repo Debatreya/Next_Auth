@@ -36,12 +36,12 @@ export default function SignupPage (){
     }
     return (
             <div className="flex flex-col items-center justify-center min-h-screen py-2">
-                <h1>{loading ? "Loading" : "Signup"}</h1>
-                <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700" />
-                <div className="flex items-center justify-between">
+                <h1 className="text-3xl">{loading ? "Loading" : "Signup"}</h1>
+                <div className="w-[340px] h-1 mb-3 mt-2 bg-gray-300"></div>
+                <div className="flex items-center justify-between mb-4 w-[320px]">
                     <label htmlFor="username">Username</label>
                     <input
-                        className="p-2 text-slate-800 border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+                        className="p-2 text-slate-800 border-gray-300 rounded-lg focus:outline-none focus:border-gray-600"
                         id="username"
                         type="text"
                         value={user.username}
@@ -49,10 +49,10 @@ export default function SignupPage (){
                         placeholder="username"
                     />
                 </div>
-                <div className="flex items-center justify-between">   
+                <div className="flex items-center justify-between mb-4 w-[320px]">   
                     <label htmlFor="email">Email</label>
                     <input
-                        className="p-2 text-slate-800 border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+                        className="p-2 text-slate-800 border-gray-300 rounded-lg focus:outline-none focus:border-gray-600"
                         id="email"
                         type="email"
                         value={user.email}
@@ -60,10 +60,10 @@ export default function SignupPage (){
                         placeholder="email@example.com"
                     />
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between w-[320px] mb-4">
                     <label htmlFor="password">Password</label>
                     <input
-                        className="p-2 text-slate-800 border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+                        className="p-2 text-slate-800 border-gray-300 rounded-lg focus:outline-none focus:border-gray-600"
                         id="password"
                         type="password"
                         value={user.password}
