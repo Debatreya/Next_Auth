@@ -6,29 +6,6 @@ import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function ProfilePage() {
-    
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get('/api/users/me');
-                console.log("response from server: " + res.data);
-                
-                setUsername((prev) => {
-                    prev += res.data.username;
-                    console.log(prev + " in setuername");
-                    return prev;
-                })
-                setEmail(res.data.email);
-            } catch (error: any) {
-                toast.error(error.message);
-            }
-        };
-        fetchData();
-        console.log(username, email);
-        
-    }, [username, email])
     const router = useRouter()
     const logout = async () => {
         try{
@@ -40,17 +17,14 @@ export default function ProfilePage() {
         }
     }
     const getUserDetails = async () => {
-        try {
-            console.log(username, email);
-
-            router.push(`/profile/${username}`)
-        }catch(e: any){
-            toast.error(e.message);
-        }
+        const res = await axios.get('/api/users/me')
+        console.log(res.data);
+        router.push(`/profile/${res.data.username}`)
     }
+
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1 className="text-4xl">Profile of {username}</h1>
+            <h1 className="text-4xl">Profile</h1>
             <hr />
             <p>Profile page</p>
             <button
