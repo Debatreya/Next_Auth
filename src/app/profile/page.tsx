@@ -2,10 +2,25 @@
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function ProfilePage() {
+    
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get('/api/users/me');
+                setUsername(res.data.username);
+                setEmail(res.data.email);
+            } catch (error: any) {
+                toast.error(error.message);
+            }
+        };
+        fetchData();
+    }, [])
     const router = useRouter()
     const logout = async () => {
         try{
@@ -17,15 +32,11 @@ export default function ProfilePage() {
         }
     }
     const getUserDetails = async () => {
-        const res = await axios.get('/api/users/me');
-        const profileDetails:any = {
-            username: res.data.data.username,
-            email: res.data.data.email
+        try {
+            router.push(`/profile/${username}`)
+        }catch(e: any){
+            toast.error(e.message);
         }
-        console.log(profileDetails);
-        
-        const username = profileDetails.username;
-        router.push(`/profile/${username}`)
     }
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
