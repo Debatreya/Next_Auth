@@ -13,6 +13,8 @@ export default function ProfilePage() {
         const fetchData = async () => {
             try {
                 const res = await axios.get('/api/users/me');
+                console.log("response from server: " + res);
+                
                 setUsername(res.data.username);
                 setEmail(res.data.email);
             } catch (error: any) {
@@ -20,6 +22,8 @@ export default function ProfilePage() {
             }
         };
         fetchData();
+        console.log(username, email);
+        
     }, [])
     const router = useRouter()
     const logout = async () => {
@@ -33,6 +37,8 @@ export default function ProfilePage() {
     }
     const getUserDetails = async () => {
         try {
+            console.log(username, email);
+
             router.push(`/profile/${username}`)
         }catch(e: any){
             toast.error(e.message);
@@ -40,7 +46,7 @@ export default function ProfilePage() {
     }
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1>Profile</h1>
+            <h1 className="text-4xl">Profile of {username}</h1>
             <hr />
             <p>Profile page</p>
             <button
@@ -56,6 +62,7 @@ export default function ProfilePage() {
             >
                 Logout
             </button>
+            
             <Toaster />
         </div>
     )
