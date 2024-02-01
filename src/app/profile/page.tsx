@@ -15,7 +15,11 @@ export default function ProfilePage() {
                 const res = await axios.get('/api/users/me');
                 console.log("response from server: " + res.data);
                 
-                setUsername(res.data.username);
+                setUsername((prev) => {
+                    prev += res.data.username;
+                    console.log(prev + " in setuername");
+                    return prev;
+                })
                 setEmail(res.data.email);
             } catch (error: any) {
                 toast.error(error.message);
