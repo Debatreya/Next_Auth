@@ -13,7 +13,7 @@ export default function ProfilePage() {
         const fetchData = async () => {
             try {
                 const res = await axios.get('/api/users/me');
-                console.log("response from server: " + res);
+                console.log("response from server: " + res.data);
                 
                 setUsername(res.data.username);
                 setEmail(res.data.email);
@@ -24,7 +24,7 @@ export default function ProfilePage() {
         fetchData();
         console.log(username, email);
         
-    }, [])
+    }, [username, email])
     const router = useRouter()
     const logout = async () => {
         try{
